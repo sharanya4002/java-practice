@@ -1,0 +1,472 @@
+/*Create a java application where we have one class, here we need to create objects for three newly created threads and three current threads then initially we need to display the default names for all these threads and then we need to set user-friendly names and then we need to display those values.*/
+
+
+import java.util.Scanner;
+class A
+{
+	public static void main(String args[])
+	{
+		Thread t1 = new Thread();
+		Thread t2 = new Thread();
+		Thread t3 = new Thread();
+			
+		Thread t4 = Thread.currentThread();
+		Thread t5 = Thread.currentThread();
+		Thread t6 = Thread.currentThread();
+
+		System.out.println(t1.getName());
+		System.out.println(t2.getName());
+		System.out.println(t3.getName());
+		System.out.println(t4.getName());
+		System.out.println(t5.getName());
+		System.out.println(t6.getName());
+		
+		t1.setName("tomato");
+		System.out.println(t1.getName());
+	}
+}
+
+/*Create a java application where we need to display one to ten numbers by overriding the run method through the custom-defined thread with respect to class then invoke the run method through the start method.*/
+
+import java.util.Scanner;
+class A extends Thread
+{
+	public void run()
+	{
+		for(int i=0;i<=10;i++)
+		{
+			System.out.println(i);
+		}
+	}
+	public static void main(String args[])
+	{
+		A obj = new A();
+		obj.start();
+	}
+}
+/*create a java application where we have one class like c1, it contains one non-static method m1 having parameter String and return type as float, we have another class named c2 which contains a non-static method like m2 having parameters as boolean and returns a long value, then invoke these two methods wrt custom defined thread class c3 by overriding run method by providing dynamic inputs then invoke run method through start method.*/
+
+import java.util.Scanner;
+class c1
+{
+	static Scanner sc = new Scanner(System.in);
+	float m1(String s)
+	{
+		System.out.print(s);
+		return sc.nextFloat();
+	}
+}
+class c2
+{
+	long m2(Boolean b)
+	{
+		System.out.println(b);
+		return c1.sc.nextLong();
+	}
+}
+class c3 extends Thread
+{
+	public void run()
+	{
+		System.out.println(new c1().m1(c1.sc.next()));
+		System.out.println(new c2().m2(c1.sc.nextBoolean()));
+	}
+	public static void main(String args[])
+	{
+		c3 t = new c3();
+		t.start();
+	}
+}
+
+/*Create a java application where we need to display the numbers from 5 to 1 by taking a time interval of 3 seconds by over riding the run method and then invoke the run method through the start method.*/
+
+import java.util.Scanner;
+class A extends Thread
+{
+	public void run()
+	{
+		for(int i=5;i>=1;i--)
+		{
+			System.out.println(i);
+			try
+			{
+				Thread.sleep(3000);
+			}
+			catch(Exception e)
+			{
+				System.out.print("some error occoured");
+			}
+		}
+	}
+	public static void main(String args[])
+	{
+		A obj = new A();
+		obj.start();
+	}
+}
+
+/*Create a java application where we need to create two custom defined threads, first thread has to display 1 to 10 and the second thread has to display 10 to 1 by overriding run methods. and then invoke run through start*/
+
+import java.util.Scanner;
+class A extends Thread
+{
+	public void run()
+	{
+		for(int i=0;i<10;i++)
+		{
+			System.out.println(i);
+		}
+	}
+}
+class B extends Thread
+{
+	public void run()
+	{
+		for(int i=10;i>=1;i--)
+		{
+			System.out.println(i);
+		}
+	}
+}
+class Main
+{
+	public static void main(String args[])
+	{
+		new B().start();
+		new A().start();
+	}
+}
+
+/*create a java application where we need to create three custom defined threads, first thread has to display 1 to 10 numbers, the second thread has to display 10 to 1 numbers and the third thread has to display 11 to 20 numbers by overriding the run method then invoke run through start methods. Note: result should be in order. */
+
+import java.util.Scanner;
+class A extends Thread
+{
+	public void run()
+	{
+		for(int i=0;i<10;i++)
+		{
+			System.out.println(i);
+		}
+	}
+}
+class B extends Thread
+{
+	public void run()
+	{
+		for(int i=10;i>=1;i--)
+		{
+			System.out.println(i);
+		}
+	}
+}
+class C extends Thread
+{
+	public void run()
+	{
+		for(int i=11;i<=20;i++)
+		{
+			System.out.println(i);
+		}
+	}
+}
+class Main
+{
+	public static void main(String args[]) throws InterruptedException
+	{
+		A t1 = new A();
+		B t2 = new B();
+		C t3 = new C();
+		
+		t1.start();
+		t1.join();
+		t2.start();
+		t2.join();
+		t3.start();
+		t3.join();
+	}
+}
+/*create a java application where we have one class, it contains two newly created threads and two current threads then find out whether these threads are available under CPU control or not.  */
+
+class A 
+{
+	public static void main()
+	{
+		Thread t1 = new Thread();
+		Thread t2= new Thread();
+		Thread t3 = Thread.currentThread();
+		Thread t4 = Thread.currentThread();
+	
+		System.out.println(t1.isAlive());
+		System.out.println(t2.isAlive());
+		System.out.println(t3.isAlive());
+		System.out.println(t4.isAlive());
+	}
+}
+-----------------------
+/*create a java application where we have one class, it contains two nonstatic methods like m1 and m2 with parameters and return types, we need to create one custom-defined thread, print any user-friendly message by overriding the run method, invoke run through start method and invoke the two nonstatic methods with respect to custom defined thread class object.*/
+
+
+import java.util.Scanner;
+class A
+{
+	static Scanner sc = new Scanner(System.in);
+	int m1(String s)
+	{
+		System.out.print(s);
+		return sc.nextInt();
+	}
+	String m2(int a)1
+	{
+		System.out.print(a);
+		return sc.next();
+	}
+}
+class Main extends Thread
+{
+	public void run()
+	{
+		System.out.println("welcome");
+		System.out.print(new A().m1(A.sc.next()));
+		System.out.print(new A().m2(A.sc.nextInt()));
+	}
+	public static void main(String args[])
+	{
+		Main t = new Main();
+		t.start();
+	}
+}
+
+/* create a java application in which we need to create three threads like two threads are newly created and another thread is a current thread then we need to get the priority values of each and every thread by using the get priority method. */
+
+class A implements Runnable
+{
+	public void run()
+	{
+	}
+	public static void main(String args[])
+	{
+		A obj = new A();
+		Thread t1 = new Thread(obj);
+		Thread t2 = new Thread(obj);
+		Thread t3 = Thread.currentThread();
+		
+		t1.setPriority(10);
+		t2.setPriority(1);
+		System.out.println(t1.getPriority());
+		System.out.println(t2.getPriority());
+		System.out.println(t3.getPriority());
+	}
+}		
+------------implementing through thread-----------------
+import java.util.Scanner;
+class A implements Runnable
+{
+	public void run()
+	{
+		System.out.print("hi");`
+	}
+	public static void main(String args[])
+	{
+		A obj = new A();
+		Thread t = new Thread(obj);
+		t.start();
+	}
+}
+---------------Assinging multiple tasks to multiple thread with a  single class-----------------------------
+import java.util.Scanner;
+class A implements Runnable
+{
+	public void run()
+	{
+		Thread t = Thread.currentThread();
+		String s = t.getName();
+		if(s.equals("t1"))
+			printmsg();
+		else if(s.equals("t2"))
+			printNumbers();
+		else
+			printChar();
+	}
+	void printmsg()
+	{
+		System.out.println("welcome"+Thread.currentThread().getName());
+	}
+	void printNumbers()
+	{
+		for(int i=0;i<10;i++)
+		{
+			System.out.println(i+" "+Thread.currentThread().getName());
+		}
+	}
+	void printChar()
+	{
+		for(char c ='A';c<'G';c++)
+		{
+			System.out.println(c+" "+Thread.currentThread().getName());
+		}
+	}
+	public static void main(String args[])
+	{
+		A obj = new A();
+		Thread t1 = new Thread(obj);
+		t1.setName("t1");
+		Thread t2 = new Thread(obj);
+		t2.setName("t2");
+		Thread t3 = new Thread(obj);
+		t3.setName("t3");
+		t1.start();
+		t2.start();
+		t3.start();
+		
+	}
+}
+-------------------------------Daemon Thread--------------------------------------------
+class Eclipse implements Runnable
+{
+	public void run()
+	{
+		Thread t = Thread.currentThread();
+		String name = t.getName();
+		if(name.equals("typing"))
+			typing();
+		else if(name.equals("saved"))
+			autoSave();
+		else
+			autoCompile();
+		
+	}
+	void typing()
+	{
+		for(int i=0;i<10;i++)
+		{
+			System.out.println("typing..............");
+			try
+			{
+				Thread.sleep(1000);
+			}
+			catch(Exception e)
+			{
+				System.out.print("error");
+			}
+			
+		}
+	}
+	void autoSave()
+	{
+		// this for loop terminates even without the termination condition as thread used to call this method is daemon thread  and daemon thread depends on user thread i.e current thread 
+		for(int i=0;;i++)
+		{
+			System.out.println("saved............");
+			try
+			{
+				Thread.sleep(1000);
+			}
+			catch(Exception e)
+			{
+				System.out.print("error");
+			}
+
+
+		}
+	}
+	void autoCompile()
+	{
+		// this for loop terminates even without the termination condition as thread used to call this method is daemon thread  and daemon thread depends on user thread i.e current thread 
+		for(int i=0;;i++)
+		{
+			System.out.println("compiling............");
+			try
+			{
+				Thread.sleep(1000);
+			}
+			catch(Exception e)
+			{
+				System.out.print("error");
+			}
+
+		}
+	}
+	public static void main(String args[])
+	{
+		Eclipse e = new Eclipse();
+		Thread t1 = new Thread(e);
+		Thread t2 = new Thread(e);
+		Thread t3 = new Thread(e);
+		
+		t1.setName("typing");
+		t2.setName("saved");
+		t3.setName("compiling");
+		
+		//creation of daemon thread
+		t2.setDaemon(true);
+		t3.setDaemon(true);
+		
+		t1.start();
+		t2.start();
+		t3.start();
+	}
+
+}
+---------------------------------------------------------- overiding run method using lamba expression for simplification ------------------------------------------------------------------
+class A
+{
+	public static void main(String args[])
+	{
+		Runnable r = ()->{
+		
+			System.out.print("hi");
+		};
+		Thread t = new Thread(r);
+		t.start();
+	}
+}	
+-------------------------------------- lamba expression in global area------------------------------------------------------------------
+import java.util.Scanner;
+class A 
+{
+	static Runnable r = ()->
+	{
+	A obj = new A();
+	Thread t = Thread.currentThread();
+		String s = t.getName();
+		if(s.equals("t1"))
+			obj.printmsg();
+		else if(s.equals("t2"))
+			obj.printNumbers();
+		else
+			obj.printChar();
+	};
+	void printmsg()
+	{
+		System.out.println("welcome"+Thread.currentThread().getName());
+	}
+	void printNumbers()
+	{
+		for(int i=0;i<10;i++)
+		{
+			System.out.println(i+" "+Thread.currentThread().getName());
+		}
+	}
+	void printChar()
+	{
+		for(char c ='A';c<'G';c++)
+		{
+			System.out.println(c+" "+Thread.currentThread().getName());
+		}
+	}
+	public static void main(String args[])
+	{
+		Thread t1 = new Thread(r);
+		t1.setName("t1");
+		Thread t2 = new Thread(r);
+		t2.setName("t2");
+		Thread t3 = new Thread(r);
+		t3.setName("t3");
+		t1.start();
+		t2.start();
+		t3.start();
+		
+	}
+}
+	
