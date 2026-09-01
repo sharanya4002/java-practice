@@ -1,0 +1,498 @@
+1.	create java application where we have one class that contains one private variable and one method with parameter and return type, inside this class, we have two inner classes, which contain one method with parameter and return type individually, these methods have to access the private variable and then we need to invoke all these methods under main by providing dynamic inputs (innerclass.java)
+
+import java.util.*;
+class A
+{
+	static Scanner sc=new Scanner(System.in);
+	private String name;
+	A(String name)
+	{
+		this.name=name;
+	}
+	boolean m1(int n)
+	{
+		System.out.println(n);
+		return sc.nextBoolean();
+	}
+
+	class B1
+	{
+		String m2(boolean b)
+		{
+			System.out.println(name);
+			System.out.println(b);
+			return sc.next();
+		}
+
+	}
+
+	class B2
+	{
+		int m3(float f)
+		{
+			System.out.println(name);
+			System.out.println(f);
+			return sc.nextInt();
+		}
+	}
+}
+
+class Main
+{
+	public static void main(String args[])
+	{
+		Scanner sc=new Scanner(System.in);
+		A obj=new A(sc.next());
+		System.out.println(obj.m1(sc.nextInt()));
+		A.B1 o1=obj.new B1();
+		System.out.println(o1.m2(sc.nextBoolean()));
+		A.B2 o2=obj.new B2();
+		System.out.println(o2.m3(sc.nextFloat()));
+	}
+}
+
+2.	create a java application where we have one class that contains one method with parameter and return type, inside this method we have one inner class which contains two methods with parameters and return types then invoke all these methods by providing Dynamic inputs. (localinner.java)
+
+import java.util.*;
+class A
+{
+	static Scanner sc=new Scanner(System.in);
+	boolean m1(int n)
+	{
+		System.out.println(n);
+
+		class I1
+		{
+			int m2(String s)
+			{
+				System.out.println(s);
+				return sc.nextInt();
+			}
+
+			boolean m3(float f)
+			{
+				System.out.println(f);
+				return sc.nextBoolean();
+			}
+		}
+
+		I1 obj=new I1();
+		System.out.println(obj.m2(sc.next()));
+		System.out.println(obj.m3(sc.nextFloat()));
+
+		return sc.nextBoolean();
+	}
+}
+
+class Main
+{
+	public static void main(String args[])
+	{
+		Scanner sc=new Scanner(System.in);
+		A o=new A();
+		System.out.println(o.m1(sc.nextInt()));
+	}
+}
+
+3.	create a java application where we have one class, it contains one method with parameter and return type, inside this class we have another class it contains one more method with parameter and return type, inside this method we have two inner classes with respect to individual methods with parameters and return types. then invoke all these methods under the main method by providing dynamic inputs (jujubi.java)
+
+import java.util.*;
+class A
+{
+	static Scanner sc=new Scanner(System.in);
+	boolean m1(int n)
+	{
+		System.out.println(n);
+		return sc.nextBoolean();
+	}
+	
+	class I1
+	{
+		int m2(String s)
+		{
+			System.out.println(s);
+
+			class I11
+			{
+				float m3(int d)
+				{
+					System.out.println(d);
+					return sc.nextFloat();
+				}
+			}
+
+
+			class I12
+			{
+				double m4(String str)
+				{
+					System.out.println(str);
+					return sc.nextDouble();
+				}
+			}
+
+			I11 o1=new I11();
+			System.out.println(o1.m3(sc.nextInt()));
+			I12 o2=new I12();
+			System.out.println(o2.m4(sc.next()));
+			return sc.nextInt();
+		}
+	}
+
+}
+
+class Main
+{
+	public static void main(String args[])
+	{
+		Scanner sc=new Scanner(System.in);
+		A obj=new A();
+		System.out.println(obj.m1(sc.nextInt()));
+		A.I1 o=obj.new I1();
+		System.out.println(o.m2(sc.next()));
+	}
+}
+
+4.	create java application where we have one class, it contains one method with parameter and return type, inside this class, we have another class that is static, here also we have one method with parameter and return type then invoke these two methods under the main by providing dynamic inputs.(staticinner.java)
+
+----------------------if method is static------------------------------
+import java.util.*;
+class A
+{
+	static Scanner sc=new Scanner(System.in);
+	static boolean m1(String s)
+	{
+		System.out.println(s);
+		return sc.nextBoolean();
+	}
+
+	static class B
+	{
+		int m2(float f)
+		{
+			System.out.println(f);
+			return sc.nextInt();
+		}
+	}
+}
+
+class Main
+{
+	public static void main(String args[])
+	{
+		Scanner sc=new Scanner(System.in);
+		A.B obj=new A.B();
+		System.out.println(obj.m2(sc.nextFloat()));
+		System.out.println(A.m1(sc.next()));
+
+	}
+}
+
+----------------------------------------if method is non-static------------------------------
+import java.util.*;
+class A
+{
+	static Scanner sc=new Scanner(System.in);
+	 boolean m1(String s)
+	{
+		System.out.println(s);
+		return sc.nextBoolean();
+	}
+
+	static class B
+	{
+		int m2(float f)
+		{
+			System.out.println(f);
+			return sc.nextInt();
+		}
+	}
+}
+
+class Main
+{
+	public static void main(String args[])
+	{
+		Scanner sc=new Scanner(System.in);
+		A o=new A();
+		System.out.println(o.m1(sc.next()));
+		A.B obj=new A.B();
+		System.out.println(obj.m2(sc.nextFloat()));
+	}
+}
+
+5.	create a java application where we have one interface, which contains two abstract methods then provide an implementation for this interface by using an anonymous inner class and then invoke all these methods under main by providing dynamic inputs. (anonymous.java)
+
+import java.util.*;
+interface A
+{
+	abstract boolean m1(String s);
+	abstract String m2(int n);
+}
+class Main
+{
+	public static void main(String args[])
+	{
+		Scanner sc=new Scanner(System.in);
+		
+		A obj=new A()
+		{
+			public boolean m1(String s)
+			{
+				System.out.println(s);
+				return sc.nextBoolean();
+			}
+
+			public String m2(int n)
+			{
+				System.out.println(n);
+				return sc.next();
+			}
+		};
+
+		System.out.println(obj.m1(sc.next()));
+		System.out.println(obj.m2(sc.nextInt()));
+	}
+}
+
+6.	create a java application where we have one abstract class it contains one abstract method, one defined method, and one parameterized constructor, and one interface it contains one abstract method and one defined method then, provide the implementation for both abstract class and interface by using anonymous inner classes by providing dynamic inputs. (anonymous2.java) 
+
+import java.util.*;
+abstract class A
+{
+	static Scanner sc=new Scanner(System.in);
+	abstract void m1(int n);
+	boolean m2(String s)
+	{
+		System.out.println(s);
+		return sc.nextBoolean();
+	}
+
+	A(int d)
+	{
+		System.out.println(d);
+	}
+
+}
+
+interface I
+{
+	static Scanner sc=new Scanner(System.in);
+	abstract void m3(float f);
+	default int m4(String g)
+	{
+		System.out.println(g);
+		return sc.nextInt();
+	}
+}
+
+class Main  
+
+{
+	public static void main(String args[])
+	{
+		Scanner sc=new Scanner(System.in);
+		A obj = new A(sc.nextInt())
+		{
+    			public void m1(int n)
+    			{
+       				 System.out.println(n);
+    			}
+		};
+
+		I o = new I()
+		{
+    			public void m3(float f)
+    			{
+        			System.out.println(f);
+    			}
+		};
+		obj.m1(sc.nextInt());
+		System.out.println(obj.m2(sc.next()));
+		
+		o.m3(sc.nextFloat());
+		System.out.println(o.m4(sc.next()));
+	}
+}
+
+7.	create a java application where we have one interface it contains one abstract method and one defined method, inside this interface we have two interfaces with respect to individual abstract methods, then provide an implementation for all these interfaces into one concrete class and then invoke all these methods by providing dynamic inputs. (nested.java)
+
+import java.util.*;
+
+interface I
+{
+    boolean m1(int n);
+
+    static void m2(String s)
+    {
+        System.out.println(s);
+    }
+
+    interface I1
+    {
+        String m3(float f);
+    }
+
+    interface I2
+    {
+        double m4(int d);
+    }
+}
+
+class A implements I, I.I1, I.I2
+{
+    static Scanner sc = new Scanner(System.in);
+
+    public boolean m1(int n)
+    {
+        System.out.println(n);
+        return sc.nextBoolean();
+    }
+
+    public String m3(float f)
+    {
+        System.out.println(f);
+        return sc.next();
+    }
+
+    public double m4(int d)
+    {
+        System.out.println(d);
+        return sc.nextDouble();
+    }
+}
+
+class Main
+{
+    public static void main(String args[])
+    {
+        Scanner sc = new Scanner(System.in);
+
+        A obj = new A();
+
+        System.out.println(obj.m1(sc.nextInt()));
+
+        I.m2(sc.next());
+
+        System.out.println(obj.m3(sc.nextFloat()));
+
+        System.out.println(obj.m4(sc.nextInt()));
+    }
+}				
+			
+8.	create a java application where we have one class it contains one parameterized constructor, one method with a parameter, and a return type, inside this class we have one interface it contains one abstract method and two defined methods, provide an implementation for the interface and then invoke all the properties under main by providing dynamic inputs. (CI.java)
+
+import java.util.*;
+class A
+{
+	static Scanner sc=new Scanner(System.in);
+	A(String s)
+	{
+		System.out.println(s);
+	}
+
+	boolean m1(int n)
+	{
+		System.out.println(n);
+		return sc.nextBoolean();
+	}
+
+
+	interface I
+	{
+		Scanner sc=new Scanner(System.in);
+		float m2(boolean b);
+		
+		static int m3(float f)
+		{
+			System.out.println(f);
+			return sc.nextInt();
+		}
+
+		default double m4(int g)
+		{
+			System.out.println(g);
+			return sc.nextDouble();
+		}
+	}
+}
+
+class B implements A.I
+{
+	public float m2(boolean b)
+	{
+		System.out.println(b);
+		return sc.nextFloat();
+	}
+}
+
+class Main
+{
+	public static void main(String args[])
+	{
+		Scanner sc=new Scanner(System.in);
+		A obj=new A(sc.next());
+		System.out.println(obj.m1(sc.nextInt()));
+		B obj1=new B();
+		System.out.println(obj1.m2(sc.nextBoolean()));
+		System.out.println(A.I.m3(sc.nextFloat()));
+		System.out.println(obj1.m4(sc.nextInt()));
+	}
+}
+		
+9.	create a java application where we have one interface it contains one abstract and one defined method, inside this interface we have two concrete classes with respect to individual methods, provide an implementation for the interface then invoke all these methods under the main with dynamic inputs. (IC.java)
+
+import java.util.*;
+interface I
+{
+	static Scanner sc=new Scanner(System.in);
+	boolean m1(int n);
+	static void m2(String s)
+	{
+		System.out.println(s);
+	}
+
+	class A
+	{
+		int m3(int d)
+		{
+			System.out.println(d);
+			return sc.nextInt();
+		}
+	}
+
+	class B
+	{
+		float m4(float f)
+		{
+			System.out.print(f);
+			return sc.nextFloat();
+		}
+	}
+}
+
+class C implements I
+{
+	public boolean m1(int n)
+	{
+		System.out.println(n);
+		return I.sc.nextBoolean();
+	}
+}
+
+class Main
+{
+	public static void main(String args[])
+	{
+		Scanner sc=new Scanner(System.in);
+		C obj=new C();
+		System.out.println(obj.m1(sc.nextInt()));
+		I.m2(sc.next());
+		I.A obj1=new I.A();
+		System.out.println(obj1.m3(sc.nextInt()));
+		I.B obj2=new I.B();
+		System.out.println(obj2.m4(sc.nextFloat()));
+	}
+}
+		
+		
