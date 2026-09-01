@@ -1,0 +1,380 @@
+================== EXCEPTION HANDLING======================
+1. create a Java application where we need to perform the division of two numbers by taking dynamic inputs, if we give valid input then it has to provide a valid output if we give invalid input then, it will raise an arithmetic exception, and for that exception, we need to provide user-friendly error message by utilizing try and catch blocks. (trycatch.java)
+
+import java.util.*;
+
+class A
+{
+    public static void main(String args[])
+    {
+        Scanner sc = new Scanner(System.in);
+
+        try
+        {
+            System.out.print("Enter first number: ");
+            int a = sc.nextInt();
+
+            System.out.print("Enter second number: ");
+            int b = sc.nextInt();
+
+            int c = a / b;
+
+            System.out.println("Division = " + c);
+        }
+        catch(ArithmeticException e)
+        {
+            System.out.println("Error: Division by zero is not allowed.");
+        }
+
+        sc.close();
+    }
+}
+
+2.create a Java application where we need to perform the Addition of two numbers by taking dynamic inputs through command-line arguments (cla.java)
+
+import java.util.Scanner;
+class A
+{
+	public static void main(String[] args)
+	{
+		try	
+		{	
+			String s1= args[0];
+			String s2= args[1];
+			int n1 = Integer.parseInt(s1);
+			int n2 = Integer.parseInt(s2);
+			System.out.println(n1+" "+n2);
+			int sum=n1+n2;
+			System.out.println("sum : "+sum);
+		}
+		catch(NumberFormatException ne)
+		{
+			System.out.println("Can't convert String to int ");
+		}
+	}
+}
+		
+
+3.create a java application where we need to deal with multiple exceptions like ArithmeticException, NumberFormatException, and ArrayIndexOutOfBoundException by using single try and multiple catch blocks, based on particular invalid input it has to provide a particular user-friendly error message.  (multiple.java)
+
+class Multiple
+{
+    public static void main(String args[])
+    {
+        try
+        {
+            int a = Integer.parseInt(args[0]);
+            int b = Integer.parseInt(args[1]);
+
+            int c = a / b;
+
+            System.out.println("Division = " + c);
+        }
+
+        catch(ArithmeticException e)
+        {
+            System.out.println("Arithmetic Error: Cannot divide by zero.");
+        }
+
+        catch(NumberFormatException e)
+        {
+            System.out.println("Number Format Error: Enter only integers.");
+        }
+
+        catch(ArrayIndexOutOfBoundsException e)
+        {
+            System.out.println("Input Error: Please provide two command-line arguments.");
+        }
+    }
+}
+-------------------------------------------------------------------------------------------
+
+/*create a java application where we need to deal with multiple exceptions like ArithmeticException, NumberFormatException, and ArrayIndexOutOfBoundException by using single try and multiple catch blocks, based on particular invalid input it has to provide a particular user-friendly error message.  (multiple.java) */
+
+import java.util.Scanner;
+class A
+{
+	public static void main(String[] args)
+	{
+		Scanner sc = new Scanner(System.in);
+		try
+		{	
+			int a = sc.nextInt();
+			int b = sc.nextInt();
+			int c=a/b;
+			String s1 = args[0];
+			int n1 = Integer.parseInt(s1);
+			System.out.print(n1);
+			int n = sc.nextInt();
+			int arr[] = new int[n];
+			for(int i=0;i<n;i++)
+			{
+				arr[i]=sc.nextInt();
+			}
+			System.out.println(arr[6]);
+		}
+		catch(ArithmeticException ae)
+		{
+			System.out.println("Can't divide with 0");
+		}
+		catch(NumberFormatException ne)
+		{
+			System.out.println("Can't convert String to int");
+		}		
+		catch(ArrayIndexOutOfBoundsException ae)
+		{
+			System.out.println("exceed index access");
+		}
+		catch(Exception e)
+		{
+			System.out.println("Invalid Input");
+		}
+	}
+}
+		
+
+4.Create a java application where we have one class, it contains two nonstatic methods, the m1 method has to deal with the arithmetic exception, m2 method has to deal with input mismatch exception then invoke these two methods under the main method (kyaa.java)
+
+import java.util.*;
+
+class A
+{
+    Scanner sc = new Scanner(System.in);
+
+    void m1()
+    {
+        try
+        {
+            System.out.print("Enter first number: ");
+            int a = sc.nextInt();
+
+            System.out.print("Enter second number: ");
+            int b = sc.nextInt();
+
+            System.out.println("Division = " + (a / b));
+        }
+
+        catch(ArithmeticException e)
+        {
+            System.out.println("Arithmetic Exception Occurred.");
+        }
+    }
+
+    void m2()
+    {
+        try
+        {
+            System.out.print("Enter an integer: ");
+            int n = sc.nextInt();
+
+            System.out.println("Entered Number = " + n);
+        }
+
+        catch(InputMismatchException e)
+        {
+            System.out.println("Input Mismatch Exception Occurred.");
+        }
+    }
+}
+
+class Kyaa
+{
+    public static void main(String args[])
+    {
+        A obj = new A();
+
+        obj.m1();
+        obj.m2();
+    }
+}
+
+------------------------------------------------------------------------
+import java.util.Scanner;
+import java.util.InputMismatchException;
+class A
+{
+	static Scanner sc = new Scanner(System.in);
+	int m1(int a, int b)
+	{
+			int c = a/b;
+			return c;
+	}
+	String m2(int a)
+	{
+		System.out.println(a);
+		return sc.next();
+	}	
+	public static void main(String[] args)
+	{
+		A obj = new A();
+	
+		try
+		{
+			System.out.println(obj.m1(sc.nextInt(),sc.nextInt()));
+			System.out.println(obj.m2(sc.nextInt()));
+		}
+		catch(InputMismatchException ie)
+		{
+			System.out.println("Invalid Input");
+		}
+	}
+}
+
+
+5.Create a java application where we need to deal with exception classes.  (haha.java)
+
+import java.util.Scanner;
+
+class InvalidAgeException extends Exception
+{
+    InvalidAgeException(String msg)
+    {
+        super(msg);
+    }
+}
+
+class A
+{
+    static void checkAge(int age) throws InvalidAgeException
+    {
+        if(age < 18)
+        {
+            throw new InvalidAgeException("Age must be 18 or above");
+        }
+        else
+        {
+            System.out.println("Eligible for voting");
+        }
+    }
+
+    public static void main(String[] args)
+    {
+        Scanner sc = new Scanner(System.in);
+
+        try
+        {
+            System.out.print("Enter age: ");
+            int age = sc.nextInt();
+
+            checkAge(age);
+        }
+        catch(InvalidAgeException e)
+        {
+            System.out.println("Custom Exception: " + e.getMessage());
+        }
+        catch(Exception e)
+        {
+            System.out.println("Exception: " + e);
+        }
+        finally
+        {
+            System.out.println("Program executed successfully");
+        }
+    }
+}
+
+6.create a java application where we need to deal with throws keyword. (th.java)
+
+import java.util.*;
+
+class Th
+{
+    static void divide(int a, int b) throws ArithmeticException
+    {
+        System.out.println("Division = " + (a / b));
+    }
+
+    public static void main(String args[])
+    {
+        Scanner sc = new Scanner(System.in);
+
+        try
+        {
+            System.out.print("Enter first number: ");
+            int a = sc.nextInt();
+
+            System.out.print("Enter second number: ");
+            int b = sc.nextInt();
+
+            divide(a, b);
+        }
+
+        catch(ArithmeticException e)
+        {
+            System.out.println("Cannot divide by zero.");
+        }
+
+        sc.close();
+    }
+}
+
+
+
+
+7.Create a Java application where we need to create custom-defined exceptions like InvalidLoginException, need to create a Gmail application by validating username and password, if we give valid credentials we need to get a welcome message, if we give invalid credentials then that application has to raise custom defined exception like invalidLoginException with respect to a user-friendly error message by using both throws and throw keyword
+
+import java.util.Scanner;
+class InvalidLoginException extends Exception
+{
+	InvalidLoginException(String msg)
+	{
+		super(msg);
+	}
+}
+class Gmail
+{
+	private String username;
+	private String password;
+	Gmail(String username,String password)
+	{
+		this.username = username;
+		this.password = password;
+	}
+	String getUname()
+	{
+		return username;
+	}
+	void setUname(String uname)
+	{
+		this.username = uname;
+	}
+	String getPassword()
+	{
+		return password;
+	}
+	void setPassword(String password)
+	{
+		this.password = password;
+	}
+}
+class Main
+{
+	static Scanner sc = new Scanner(System.in);
+	static Gmail obj =new  Gmail(sc.next(),sc.next());
+	public static void validateCredentials(String uname,String password) throws InvalidLoginException
+	{
+		if(uname.equals(obj.getUname()) && password.equals(obj.getPassword()))
+		{
+			System.out.print("login succesful welcome");
+		}
+		else
+		{
+			throw new InvalidLoginException("Invalid Credentials");
+		}
+	}
+		
+	public static void main(String args[])
+	{
+		Scanner sc = new Scanner(System.in);
+		System.out.print("enter credentials to validate");
+		try
+		{
+			validateCredentials(sc.next(),sc.next());
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+
+	}
+}
