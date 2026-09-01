@@ -1,0 +1,210 @@
+--------------------------------------sychronized----------------------
+OBJECT level locking
+----at method level----------------------------
+class A implements Runnable
+{
+	 synchronized public void run()
+	{
+		try
+		{
+		System.out.println("Printing by thread "+Thread.currentThread().getName());
+		Thread.sleep(1000);
+		System.out.println("Printing by thread "+Thread.currentThread().getName());
+		Thread.sleep(1000);
+		System.out.println("Printing by thread "+Thread.currentThread().getName());
+		Thread.sleep(1000);
+		}
+		catch(Exception e)
+		{
+			System.out.print("some error occured");
+		}
+		
+	}
+	public static void main()
+	{
+		A obj1 = new A();
+		Thread t1 = new Thread(obj1);
+		Thread t2 = new Thread(obj1);
+		Thread t3 = new Thread(obj1);
+		
+		t1.setName("t1");
+		t2.setName("t2");
+		t3.setName("t3");
+		
+		t1.start();
+		t2.start();
+		t3.start();
+	}
+}
+---------------------------at block level------------------------------------
+class A implements Runnable
+{
+	 public void run()
+	{
+		 try
+		{
+			System.out.println("Printing by thread "+Thread.currentThread().getName());
+			Thread.sleep(1000);
+			System.out.println("Printing by thread "+Thread.currentThread().getName());
+			Thread.sleep(1000);
+			System.out.println("Printing by thread "+Thread.currentThread().getName());
+			Thread.sleep(1000);
+			synchronized(this)
+			{
+				System.out.println("Printing by thread "+Thread.currentThread().getName());
+				Thread.sleep(1000);
+				System.out.println("Printing by thread "+Thread.currentThread().getName());
+				Thread.sleep(1000);
+				System.out.println("Printing by thread "+Thread.currentThread().getName());
+				Thread.sleep(1000);
+			}
+		}
+		catch(Exception e)
+		{
+			System.out.print("some error occured");
+		}
+		
+	}
+	public static void main()
+	{
+		A obj1 = new A();
+		Thread t1 = new Thread(obj1);
+		Thread t2 = new Thread(obj1);
+		Thread t3 = new Thread(obj1);
+		
+		t1.setName("t1");
+		t2.setName("t2");
+		t3.setName("t3");
+		
+		t1.start();
+		t2.start();
+		t3.start();
+	}
+}
+--------------------------------------------class level lockingg----------------------------------
+class A implements Runnable
+{
+	 public void run()
+	{
+		try
+		{
+			m1();
+			Thread.sleep(1000);
+		}
+		catch(Exception e)
+		{
+			System.out.print("some error Occured");
+		}
+	}
+	public static synchronized void m1()
+	{
+		for(int i=0;i<5;i++)
+		{
+			System.out.println(i +" -" + Thread.currentThread().getName());
+		}
+	}
+	public static void main()
+	{
+		A obj1 = new A();
+		Thread t1 = new Thread(obj1);
+		Thread t2 = new Thread(obj1);
+		Thread t3 = new Thread(obj1);
+		
+		t1.setName("t1");
+		t2.setName("t2");
+		t3.setName("t3");
+		
+		t1.start();
+		t2.start();
+		t3.start();
+		
+		A obj2 = new A();
+		Thread t4 = new Thread(obj2);
+		Thread t5 = new Thread(obj2);
+		Thread t6 = new Thread(obj2);
+		
+		t4.setName("t4");
+		t5.setName("t5");
+		t6.setName("t6");
+		
+		t4.start();
+		t5.start();
+		t6.start();
+
+	}
+}
+------------------------deadlock-----------------------
+import java.util.Scanner;
+class A implements Runnable
+{
+	String resource1 = "Playstation";
+	String resource2 = "Controller";
+	public void run()
+	{
+		String s = Thread.currentThread().getName();
+		
+		if(s.equals("rohit"))
+		{
+			rohitAquireResource();
+		}
+		else
+		{
+			ramuAquireResource();
+		}	
+	}
+	void rohitAquireResource()
+	{
+    		synchronized(resource1)
+    		{
+        		try
+        		{
+            			System.out.println("Acquired playstation");
+            			Thread.sleep(1000);
+
+            			synchronized(resource2)
+            			{
+                			System.out.println("Acquired controller");
+            			}
+        		}		
+        		catch(Exception e)
+        		{
+            			System.out.println("Some error occurred");
+        		}
+    		}
+	}	
+
+	void ramuAquireResource()
+	{
+    		synchronized(resource2)
+    		{
+        		try
+        		{
+            			System.out.println("Acquired controller");
+            			Thread.sleep(1000);
+
+            			synchronized(resource1)
+            			{
+                			System.ou	t.println("Acquired playstation");
+            			}
+        		}
+        		catch(Exception e)
+        		{
+            			System.out.println("Some error occurred");
+        		}
+   		 }
+	}	
+	public static void main(String args[])
+	{		
+		A obj = new A();
+		Thread t1 = new Thread(obj);
+		Thread t2 = new Thread(obj);
+		 
+		t1.setName("rohit");
+		t2.setName("ramu");
+
+		t1.start();
+		t2.start();
+		
+	}
+}
+					
