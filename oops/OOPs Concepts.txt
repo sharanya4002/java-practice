@@ -1,0 +1,1218 @@
+OOPs Concepts
+---------------------------
+INHERTANCE
+---------------------------
+Q1) create a java application where we have a bank, it will provide customer details like account number, IFSC Code, and ATM Pin No. and available balance to the customer then, the customer has to display all these values with respect to one user-defined method and then invoke that method under the main method. (I.java)
+import java.util.Scanner;
+class Bank
+{
+	Scanner sc = new Scanner(System.in);
+	long Accnum ;
+	int IFSCcode;
+	int ATMpin ;
+	float balance;
+	
+	void assign(long Accnum,int IFSCcode,int ATMpin,float balance)
+	{
+		this.Accnum = Accnum;
+		this.IFSCcode = IFSCcode;
+		this.ATMpin = ATMpin;
+		this.balance = balance;
+	}
+}
+class Customer extends Bank
+{
+	void display()
+	{
+		System.out.println(Accnum);
+		System.out.println(IFSCcode);
+		System.out.println(ATMpin);
+		System.out.println(balance);
+	}
+	public static void main(String args[])
+	{
+		Scanner sc = new Scanner(System.in);
+		long Accnum = sc.nextLong();
+		String IFSCcode = sc.next();
+		int ATMpin = sc.nextInt();
+		float balance = sc.nextFloat();
+
+		Customer c = new Customer();
+		c.assign(Accnum,IFSCcode,ATMpin,balance);
+		c.display();
+		
+	}
+}
+----------------------------------------------------------------------
+//another way
+import java.util.Scanner;
+class Bank
+{
+	static Scanner sc = new Scanner(System.in);
+		long Accnum = sc.nextLong();
+		int IFSCcode = sc.nextInt();
+		int ATMpin = sc.nextInt();
+		float balance = sc.nextFloat();
+
+}
+class Customer extends Bank
+{
+	void display()
+	{
+		System.out.println(Accnum);
+		System.out.println(IFSCcode);
+		System.out.println(ATMpin);
+		System.out.println(balance);
+	}
+	public static void  main(String args[])
+	{
+		Customer c = new Customer();
+		c.display();
+	}
+}
+	
+//2QCreate a java application where we have one Mobile Manufacturing Company, they will design a respective branded mobile with specifications like RAM, ROM, OS Name, OS Version, Camera, Processor, Battery, Display Type, and price then, this mobile will be released into the wholesale market then the price has to increase, from here it will be released into the retail market again price has to increase then from here this mobile will be purchased by the customer, customer has to display all these values with updated price with respect to one user-defined method and then invoke display method under the main method. 
+import java.util.Scanner;
+class Mobile
+{
+	int RAM;
+	int ROM;
+	String osname;
+	String osversion;
+	String camera;
+	int processor;
+	int battery;
+	String display;
+	int price;
+	void assign(int RAM,int ROM,String osname,String osversion,String camera,int processor,int battery,String display,int price)
+	{
+		this.RAM=RAM;
+		this.ROM=ROM;
+		this.osname=osname;
+		this.osversion=osversion;
+		this.camera=camera;
+		this.processor=processor;
+		this.battery=battery;
+		this.display=display;
+		this.price=price;
+	}
+}
+class ws extends Mobile
+{
+	int WSPrice()
+	{
+		return price+2000;
+	}
+}
+class rp extends ws
+{
+	int wp = WSPrice();
+ 	int Rprice()
+	{
+		return WSPrice()+5000;
+	}
+}
+class Customer extends rp
+{
+	static Customer c = new Customer();
+	void display()
+	{
+		System.out.println("RAM: " + RAM);
+		System.out.println("ROM: " + ROM);
+		System.out.println("OS Name: " + osname);
+		System.out.println("OS Version: " + osversion);
+		System.out.println("Camera: " + camera);
+		System.out.println("Processor: " + processor);
+		System.out.println("Battery: " + battery);
+		System.out.println("Display: " + display);
+		System.out.println("Price: " + price);
+		System.out.println("WholesalePrice: " + c.wp);
+		System.out.println("RetailPrice: " + c.Rprice());
+
+	}
+	public static void main(String args[])
+	{
+		Scanner sc = new Scanner(System.in);
+		int RAM = sc.nextInt();
+		int ROM = sc.nextInt();
+		String osname = sc.next();
+		String osversion = sc.next();
+		String camera = sc.next();
+		int processor = sc.nextInt();
+		int battery = sc.nextInt();
+		String display = sc.next();
+		int price = sc.nextInt();
+		c.assign(RAM, ROM, osname, osversion, camera, processor, battery, display, price);
+		c.display();
+	}
+}
+another way--------------------------------
+import java.util.Scanner;
+class Mobile
+{
+	static Scanner sc = new Scanner(System.in);
+		int RAM = sc.nextInt();
+		int ROM = sc.nextInt();
+		String osname = sc.next();
+		String osversion = sc.next();
+		String camera = sc.next();
+		String processor = sc.next();
+		String battery = sc.next();
+		String display = sc.next();
+		double price = sc.nextDouble();
+}
+class ws extends Mobile
+{
+	double WSPrice()
+	{
+		return price+price*(0.20);
+	}
+}
+class rp extends ws
+{
+ 	double Rprice()
+	{
+		return WSPrice()+WSPrice()*(0.50);
+	}
+}
+class Customer extends rp
+{
+	static Customer  c = new Customer();
+	void display()
+	{
+		System.out.println("RAM: " + RAM);
+		System.out.println("ROM: " + ROM);
+		System.out.println("OS Name: " + osname);
+		System.out.println("OS Version: " + osversion);
+		System.out.println("Camera: " + camera);
+		System.out.println("Processor: " + processor);
+		System.out.println("Battery: " + battery);
+		System.out.println("Display: " + display);
+		System.out.println("Price: " + price);
+		System.out.println("WholesalePrice: " + WSPrice());
+		System.out.println("RetailPrice: " + c.Rprice());
+
+	}
+	public static void main(String args[])
+	{
+		c.display();
+	}
+}
+
+
+//3QCreate a java application where we have a software company, it will provide details like EmpID, EmpDes, EmpSal, and EmpWorkLoc to the 5 employees, every employee has to display their own details with respect to one method and then invoke all those methods under main. 
+
+import java.util.Scanner;
+
+class Employee {
+    int empId;
+    String empDes;
+    double empSal;
+    String empWorkLoc;
+
+    void setDetails(int id, String des, double sal, String loc) {
+        empId = id;
+        empDes = des;
+        empSal = sal;
+        empWorkLoc = loc;
+    }
+
+    void display() {
+        System.out.println("Employee ID: " + empId);
+        System.out.println("Designation: " + empDes);
+        System.out.println("Salary: " + empSal);
+        System.out.println("Work Location: " + empWorkLoc);
+        }
+}
+
+class E1 extends Employee {
+    void show() {
+        display();
+    }
+}
+
+class E2 extends Employee {
+    void show() {
+        display();
+    }
+}
+
+class E3 extends Employee {
+    void show() {
+        display();
+    }
+}
+
+class E4 extends Employee {
+    void show() {
+        display();
+    }
+}
+
+class E5 extends Employee {
+    void show() {
+        display();
+    }
+}
+class Company{
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        E1 e1 = new E1();
+        E2 e2 = new E2();
+        E3 e3 = new E3();
+        E4 e4 = new E4();
+        E5 e5 = new E5();
+
+        e1.setDetails(sc.nextInt(), sc.next(), sc.nextDouble(), sc.next());
+        e2.setDetails(sc.nextInt(), sc.next(), sc.nextDouble(), sc.next());
+        e3.setDetails(sc.nextInt(), sc.next(), sc.nextDouble(), sc.next());
+        e4.setDetails(sc.nextInt(), sc.next(), sc.nextDouble(), sc.next());
+        e5.setDetails(sc.nextInt(), sc.next(), sc.nextDouble(), sc.next());
+
+        e1.show();
+        e2.show();
+        e3.show();
+        e4.show();
+        e5.show();
+    }
+}
+-------------------------
+import java.util.Scanner;
+
+class Employee {
+	static  Scanner sc = new Scanner(System.in);
+    	int empId = sc.nextInt();
+   	 String empDes =sc.next();
+    	double empSal= sc.nextDouble();
+    	String empWorkLoc= sc.next();
+
+  void display() {
+        System.out.println("Employee ID: " + empId);
+        System.out.println("Designation: " + empDes);
+        System.out.println("Salary: " + empSal);
+        System.out.println("Work Location: " + empWorkLoc);
+        }
+}
+
+class E1 extends Employee {
+    void show() {
+        display();
+    }
+}
+
+class E2 extends Employee {
+    void show() {
+        display();
+    }
+}
+
+class E3 extends Employee {
+    void show() {
+        display();
+    }
+}
+
+class E4 extends Employee {
+    void show() {
+        display();
+    }
+}
+
+class E5 extends Employee {
+    void show() {
+        display();
+    }
+}
+class Company{
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        E1 e1 = new E1();
+        E2 e2 = new E2();
+        E3 e3 = new E3();
+        E4 e4 = new E4();
+        E5 e5 = new E5();
+        e1.show();
+        e2.show();
+        e3.show();
+        e4.show();
+        e5.show();
+    }
+}
+
+//4QCreate a Java application where we need to satisfy hybrid inheritance by using the above pictorial representation.
+
+class A {
+    void showA() {
+        System.out.println("Class A");
+    }
+}
+
+class B extends A {
+    void showB() {
+        System.out.println("Class B");
+    }
+}
+
+class C extends A {
+    void showC() {
+        System.out.println("Class C");
+    }
+}
+
+class D extends B {
+    void showD() {
+        System.out.println("Class D");
+    }
+
+    public static void main(String[] args) {
+        D obj = new D();
+        obj.showA();
+        obj.showB();
+        obj.showD();
+
+        C obj2 = new C();
+        obj2.showA();
+        obj2.showC();
+    }
+}
+-----------------------------------------
+UPCASTING
+------------------------------------------
+import java.util.Scanner;
+class Pay
+{
+	void pay()
+	{
+		System.out.print("Making Payment");
+	}
+}
+class Upi extends Pay
+{
+	void pay()
+	{
+		System.out.print("payed using upi");
+	}
+}
+class CreditCard extends Pay
+{
+	void pay()
+	{
+		System.out.print("payed using creditcard");
+	}
+}
+class DebitCard extends Pay
+{
+	void pay()
+	{
+		System.out.print("payed using debitcard");
+	}
+}
+class NetBanking extends Pay
+{
+	void pay()
+	{
+		System.out.print("payed using netbanking");
+	}
+}
+class Main
+{
+	static void makePayment(Pay p)
+	{
+		p.pay();
+	}
+	public static void main(String args[])
+	{
+		Scanner sc = new Scanner(System.in);
+		Upi upi = new Upi();
+		CreditCard cc= new CreditCard();
+		DebitCard dc = new DebitCard();
+		NetBanking nb = new NetBanking();
+		System.out.println("Enter your Payment type");
+		System.out.printf("1.upi\n2.credit card\n3.netbanking\n4.debit card\n");
+		int n = sc.nextInt();
+		switch(n)
+		{
+			case 1: makePayment(upi); break;
+			case 2: makePayment(cc); break;
+			case 3: makePayment(nb); break;
+			case 4: makePayment(dc); break;
+		}
+	}
+}
+-----------------------05-05-2026-----------------
+//types of blocks
+class A
+{
+	{
+		System.out.print("Instance Block");
+	}
+	static 
+	{
+		System.out.print("Static Block");
+	}
+	A()
+	{
+		System.out.print("default Constructor");
+	}
+	public static void main(String args[])
+	{
+		A obj = new A();
+	}
+}
+--------------------------------------------
+TYPES OF RELATIONS
+-------------------------------------------
+-is-A-------
+class A
+{
+	int a =18;
+}
+class B extends A
+{
+	{
+		System.out.print(super.a);
+	}
+	public static void main(String args[])
+	{
+		B obj = new B();
+	}
+}
+--------has - A---------------------
+class A
+{
+	int a = 18;
+}
+class B
+{
+	static A obj = new A();
+	public static void main(String args[])
+	{
+		System.out.print(obj.a);
+	}
+}
+---------------- uses-A------------
+class A
+{
+	int a = 18;
+}
+class B
+{
+	public static void main(String args[])
+	{
+		A obj = new A();
+		System.out.print(obj.a);
+	}
+}
+---------------------------------------06-05-2026----------------------------------
+ENCAPSULATION  -- GETTER AND SETTER METHODS
+---------------------------------------------------------------------------------------
+import java.util.Scanner;
+class A
+{
+	static Scanner sc = new Scanner(System.in);
+	private int pin = sc.nextInt();
+	int getPin()
+	{
+		return pin;
+	}
+	void setPin(int pin)
+	{
+		this.pin = pin;
+	}
+}
+class B
+{
+	public static void main(String args[])
+	{
+	A obj = new A();
+	System.out.print(obj.getPin());
+	obj.setPin(A.sc.nextInt());
+	System.out.print(obj.getPin());
+	}
+}
+
+
+import java.util.Scanner;
+class A
+{
+	private String name;
+	private String password;
+	private String email;
+	A(String name,String password,String email)
+	{
+		this.name = name;
+		this.password = password;
+		this.email=email;
+	}
+	String getName()
+	{
+		return name;
+	}
+	void setName(String name)
+	{
+		this.name = name;
+	}
+	String getPassword()
+	{
+		return password;
+	}
+	void setPassword(String password)
+	{
+		this.password = password;
+	}
+	String getEmail()
+	{
+		return email;
+	}
+	void setEmail(String email)
+	{
+		this.email = email;
+	}
+}
+class B
+{
+	public static void main(String args[])
+	{
+		Scanner sc = new Scanner(System.in);
+		A obj = new A(sc.next(),sc.next(),sc.next());
+		System.out.println(obj.getName());
+		System.out.println(obj.getPassword());
+		System.out.println(obj.getEmail());
+		obj.setName(sc.next());
+		obj.setPassword(sc.next());
+		obj.setEmail(sc.next());
+		System.out.println(obj.getName());
+		System.out.println(obj.getPassword());
+		System.out.println(obj.getEmail());
+	}
+}
+----------------------------------07-05-2026------------------------------------
+
+import java.util.Scanner;
+class Pinterest
+{
+	private String uname;
+	private String password;
+	private String email;
+	private otp;
+	Pinterest(String uname ,String password,String email)
+	{
+		this.uname = uname;
+		this.password = password;
+		this.email = email;
+	}
+	String getUname()
+	{
+		return uname;
+	}
+	void setUname(String uname)
+	{
+		this.uname = uname;
+	}
+	String getPassword()
+	{
+		return password;
+	}
+	void setPassword(String password)
+	{
+		this.password = password;
+	}
+	String getEmail()
+	{
+		return email;
+	}
+	void setEmail(String email)
+	{
+		this.email = email;
+	}
+}
+class User
+{
+	public static void main(String args[])
+	{
+		Scanner sc = new Scanner(System.in);
+		Pinterest user = new Pinterest(sc.next(),sc.next(),sc.next());
+		System.out.println("Sign in Successful");
+		System.out.print("Provide username and password to login");
+		String uname = sc.next();
+		String password = sc.next();
+		Random r = new Random();
+		int otp= r.nextInt(900)+1000;
+		if(uname.equals(user.getUname()) && password.equals(user.getPassword()))
+		{
+			System.out.print("Enter OTP");
+			int uotp = sc.nextInt();
+			if(otp==uotp)
+				System.out.print("Login Successfull");
+			else
+				System.out.print("Login Invalid OTP");
+		}
+		else
+		{
+			System.out.print("Invalid Credentials");
+		}
+	}
+}
+//08-06-2026
+----------------------------------Random Number Generation--------------------------------------------
+import java.util.Random;
+class A
+{
+
+	public static void main(String args[])
+	{
+		Random r = new Random();
+		int otp = r.nextInt(900)+1000;
+		System.out.print(otp);
+	}
+}
+-------------------------------login page otp generation----------------------------------
+import java.util.*;
+class Pinterest
+{
+	private String uname;
+	private String password;
+	private String email;
+	Pinterest(String uname ,String password,String email)
+	{
+		this.uname = uname;
+		this.password = password;
+		this.email = email;
+	}
+	String getUname()
+	{
+		return uname;
+	}
+	void setUname(String uname)
+	{
+		this.uname = uname;
+	}
+	String getPassword()
+	{
+		return password;
+	}
+	void setPassword(String password)
+	{
+		this.password = password;
+	}
+	String getEmail()
+	{
+		return email;
+	}
+	void setEmail(String email)
+	{
+		this.email = email;
+	}
+}
+class User
+{
+	public static void main(String args[])
+	{
+		Scanner sc = new Scanner(System.in);
+		System.out.print("Enter details to sign in:");
+		Pinterest user = new Pinterest(sc.next(),sc.next(),sc.next());
+		System.out.println("Sign in Successful");
+		System.out.print("Provide username and password to login");
+		String uname = sc.next();
+		String password = sc.next();
+		Random r = new Random();
+		int otp= r.nextInt(900)+1000;
+		if(uname.equals(user.getUname()) && password.equals(user.getPassword()))
+		{
+			System.out.print("Enter OTP");
+			int uotp = sc.nextInt();
+			if(otp==uotp)
+				System.out.print("Login Successfull");
+			else
+				System.out.print("Login Invalid OTP");
+		}
+		else
+		{
+			System.out.print("Invalid Credentials");
+		}
+	}
+}
+
+--------------------------------------------------
+ABSTRACTION
+---------------------------------------------------
+
+1.	Create a java application where we have one abstract class which contains 2 abstract methods, inherit this class into a concrete class and provide functionality for these abstract methods and invoke all the properties under the main method by providing Dynamic inputs.
+import java.util.*;
+abstract class A
+{
+	abstract void m1(int a);
+	abstract void m2(int b);
+}
+class B extends A
+{
+	void m1(int a)
+	{
+		System.out.println("Implementation of m1 "+a);
+	}
+	void m2(int b)
+	{
+		System.out.print("implementation of m2 "+b);
+	}
+	public static void main(String args[])
+	{
+		Scanner sc = new Scanner(System.in);
+		int a = sc.nextInt();
+		int b = sc.nextInt();
+		B obj = new B();
+		obj.m1(a);
+		obj.m2(b);
+	}
+}
+2.	Create a java application where we have one abstract class which contains 2 abstract methods and one defined method, inherit this class into a concrete class and provide functionality for these abstract methods and invoke all the properties under the main method by providing Dynamic inputs.
+
+import java.util.Scanner;
+abstract class A
+{
+	abstract void m1();
+	abstract void m2();
+	void m3()
+	{
+		System.out.print("Defined method m3");
+	}
+}
+class B extends A
+{
+	void m1()
+	{
+		System.out.print("Implementation of m1");
+	}
+	void m2()
+	{
+		System.out.print("Implementation of m2");
+	}
+}
+class main
+{
+	public static void main(String args[])
+	{
+		B obj = new B();
+		obj.m1();
+		obj.m2();
+		obj.m3();
+	}
+}
+
+3. Create a java application where we have one abstract class which contains 2 abstract methods one defined method and one parameterized constructor, inherit this class into a concrete class and provide functionality for these abstract methods and invoke all the properties under the main method by providing Dynamic inputs.
+
+import java.util.Scanner;
+abstract class Ab
+{
+	static Scanner sc = new Scanner(System.in);
+	abstract int m1(boolean b);
+	abstract float m2(int c);
+	boolean m3()
+	{
+		return sc.nextBoolean();
+	}
+	ab(int a)
+	{
+		System.out.println(a);
+	}
+}
+class cc extends Ab
+{
+	cc()
+	{
+		super(sc.nextInt());
+	}
+	int m1(boolean b)
+	{
+		System.out.println(b);
+		return sc.nextInt();
+	}
+	float m2(int c)
+	{
+		System.out.println(c);
+		return sc.nextFloat();
+	}
+	public static void main(String args[])
+	{
+		cc obj = new cc();
+		obj.m1(sc.nextBoolean());
+		obj.m2(sc.nextInt());
+		obj.m3();
+	}
+}
+	
+	
+4.Create a java application where we have one abstract class, it contains 2 abstract methods, and inherit this class into another abstract class that contains 2 more abstract methods, one defined method, and one parameterized constructor, then inherit this class into a concrete class, provide partial functionality for the first abstract class and complete functionality for second abstract class and then invoke all the properties under the main by providing dynamic inputs
+import java.util.Scanner;
+abstract class A
+{
+	abstract boolean m1(int c);
+	abstract float m2(int a);
+}
+abstract class B extends A
+{	
+	static Scanner sc = new Scanner(System.in);
+	boolean m1(int c)
+	{
+		System.out.println(c);
+		return sc.nextBoolean();
+	}
+	float m2(int a)
+	{
+		System.out.println(a);
+		return sc.nextFloat();
+	}
+	abstract int m3();
+	abstract boolean m4();
+	B(int a)
+	{
+		System.out.print(a);
+	}
+	void m5(boolean b)
+	{
+		System.out.print(b);
+	}
+}
+class cc extends B
+{
+	cc()
+	{
+		super(sc.nextInt());
+	}
+	int m3()
+	{
+		return sc.nextInt();
+	}
+	boolean m4()
+	{
+		return sc.nextBoolean();
+	}
+	public static void main(String args[])
+	{
+		Scanner sc = new Scanner(System.in);
+		cc obj = new cc();
+		System.out.println(obj.m1(sc.nextInt()));
+		System.out.println(obj.m2(sc.nextInt()));
+		System.out.println(obj.m3());
+		System.out.println(obj.m4());
+	}
+}
+5.	Create a java application where we have one concrete class, it contains one parameterized constructor and one defined method, inherit this class into an abstract class that contains one parameterized constructor, one defined method, and two abstract methods, and inherit this class into another concrete class to provide functionality and then invoke all the properties under main method by providing dynamic inputs.
+import java.util.Scanner;
+class A
+{
+	A(int a)
+	{
+		System.out.println(a);
+	}
+	void m1()
+	{
+		System.out.println("defined method of cc");
+	}
+}
+abstract class B extends A
+{
+	static Scanner sc = new Scanner(System.in);
+	B(int a)
+	{
+		super(sc.nextInt());
+		System.out.print(a);
+	}
+	void m2()
+	{
+		System.out.println("Defined method of abstract c");
+	}
+	abstract int m3();
+	abstract boolean m4();
+}
+class C extends B
+{
+	
+	C()
+	{
+		super(sc.nextInt());
+	}
+	int m3()
+	{
+		return sc.nextInt();
+	}
+	boolean m4()
+	{
+		return sc.nextBoolean();
+	}
+	public static void main(String args[])
+	{
+		C obj = new C();
+		obj.m1();
+		obj.m2();
+		System.out.println(obj.m3());
+		System.out.println(obj.m4());
+	}
+}
+
+6.	Create a java application where we have one abstract class, which contains one parameterized constructor, one defined method, and two abstract methods, we also have one concrete class which contains one defined method and one parameterized constructor, then inherit both these classes into another concrete class to provide functionality for abstract methods and invoke all the properties under main method by providing dynamic inputs.
+import java.util.Scanner;
+abstract class A
+{
+	A(int a)
+	{
+		System.out.println(a);
+	}
+	void m1()
+	{
+		System.out.println("Defined method of A");
+	}
+	abstract int m2(float f);
+	abstract boolean m3(int a);
+}
+class B
+{
+	void m4()
+	{
+		System.out.print("Defined method of B");
+	}
+	B(float c)
+	{
+		System.out.println(c);
+	}
+}
+class C extends A
+{
+	static Scanner sc = new Scanner(System.in);
+	C()
+	{
+		super(sc.nextInt());
+	}
+	int m2(float f)
+	{
+		System.out.println(f);
+		return sc.nextInt();
+	}
+	boolean m3(int a)
+	{
+		System.out.println(a);
+		return sc.nextBoolean();
+	}
+	public static void main(String args[])
+	{
+		B obj1= new B(sc.nextFloat());
+		C obj=new  C();
+		obj.m1();
+		System.out.println(obj.m2(sc.nextFloat()));
+		System.out.println(obj.m3(sc.nextInt()));
+		obj1.m4();
+	}
+
+}
+7.	Create a java application where we have one abstract class which contains three abstract methods and one parameterized constructor, inherit this class into three different concrete classes, and provide functionalities for all abstract methods in each class. We also have one concrete class test which contains a method display with parameter as Abstract class object and returns Abstract class,  invoke this method under main with the appropriate object input as a parameter and then this method has to invoke all the abstract class’ properties with respect to the parameter passed statically.
+import java.util.Scanner;
+abstract class A
+{
+	static Scanner sc = new Scanner(System.in);
+	abstract int m1();
+	abstract float m2();
+	abstract boolean m3();
+	A(float f)
+	{
+		System.out.println(f);
+	}
+}
+class B extends A
+{
+	B()
+	{
+		super(sc.nextFloat());
+	}
+	int m1()
+	{
+		System.out.print("ab implemented by B");
+		return sc.nextInt();
+	}
+	float m2()
+	{
+		System.out.print("ab implemented by B");
+		return sc.nextFloat();
+	}
+	boolean m3()
+	{
+		System.out.print("ab implemented by B");
+		return sc.nextBoolean();
+	}
+}
+class C extends A
+{
+	C()
+	{
+		super(sc.nextFloat());
+	}
+	int m1()
+	{
+		System.out.print("ab implemented by C");
+		return sc.nextInt();
+	}
+	float m2()
+	{
+		System.out.print("ab implemented by C");
+		return sc.nextFloat();
+	}
+	boolean m3()
+	{
+		System.out.print("ab implemented by C");
+		return sc.nextBoolean();
+	}
+}
+class D extends A
+{
+	D()
+	{
+		super(sc.nextFloat());
+	}
+	int m1()
+	{
+		System.out.print("ab implemented by D");
+		return sc.nextInt();
+	}
+	float m2()
+	{
+		System.out.print("ab implemented by D");
+		return sc.nextFloat();
+	}
+	boolean m3()
+	{
+		System.out.print("ab implemented by D");
+		return sc.nextBoolean();
+	}
+
+}
+class test
+{
+	A display(A obj)
+	{
+		System.out.println(obj.m1());
+		System.out.println(obj.m2());
+		System.out.println(obj.m3());
+		return obj;
+	}
+	public static void main(String args[])
+	{
+		test t = new test();
+		D d = new D();
+		C c = new C();
+		B b= new B();
+		System.out.print(t.display(d));
+		System.out.print(t.display(b));
+		System.out.print(t.display(c));
+	}
+}		
+8.	Create a java application where we have one abstract class which contains three abstract methods and one parameterized constructor, inherit this class into three different concrete classes, and provide functionalities for all abstract methods in each class. We also have one concrete class test which contains a method display with parameter and Abstract class object and returns Abstract class,  invoke this method under main with the appropriate object input as a parameter and then this method has to invoke all the abstract class’ properties with respect to the parameter passed Dynamically.
+import java.util.Scanner;
+abstract class A
+{
+	static Scanner sc = new Scanner(System.in);
+	abstract int m1();
+	abstract float m2();
+	abstract boolean m3();
+	A(float f)
+	{
+		System.out.println(f);
+	}
+}
+class B extends A
+{
+	B()
+	{
+		super(sc.nextFloat());
+	}
+	int m1()
+	{
+		System.out.print("ab implemented by B");
+		return sc.nextInt();
+	}
+	float m2()
+	{
+		System.out.print("ab implemented by B");
+		return sc.nextFloat();
+	}
+	boolean m3()
+	{
+		System.out.print("ab implemented by B");
+		return sc.nextBoolean();
+	}
+}
+class C extends A
+{
+	C()
+	{
+		super(sc.nextFloat());
+	}
+	int m1()
+	{
+		System.out.print("ab implemented by C");
+		return sc.nextInt();
+	}
+	float m2()
+	{
+		System.out.print("ab implemented by C");
+		return sc.nextFloat();
+	}
+	boolean m3()
+	{
+		System.out.print("ab implemented by C");
+		return sc.nextBoolean();
+	}
+}
+class D extends A
+{
+	D()
+	{
+		super(sc.nextFloat());
+	}
+	int m1()
+	{
+		System.out.print("ab implemented by D");
+		return sc.nextInt();
+	}
+	float m2()
+	{
+		System.out.print("ab implemented by D");
+		return sc.nextFloat();
+	}
+	boolean m3()
+	{
+		System.out.print("ab implemented by D");
+		return sc.nextBoolean();
+	}
+
+}
+class test
+{
+	A display(A obj)
+	{
+		System.out.println(obj.m1());
+		System.out.println(obj.m2());
+		System.out.println(obj.m3());
+		return obj;
+	}
+	public static void main(String args[])
+	{
+		test t = new test();
+		System.out.print(t.display(new D()));
+		System.out.print(t.display(new C()));
+		System.out.print(t.display(new B()));
+	}
+}		
+
+
+
+
+
+
+
+
+
+
+
+
+
+
