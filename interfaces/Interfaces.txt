@@ -1,0 +1,442 @@
+1.	Create a java application where we have one interface which contains two abstract methods, inherit this interface into one concrete class to provide functionality for abstract methods, and invoke these methods under main by providing dynamic inputs.
+import java.util.Scanner;
+interface I
+{
+	void m1(int a);
+	void m2(int c);
+}
+class A implements I
+{
+	public void m1(int a)
+	{
+		System.out.print("method m1"+a);
+	}
+	public void m2(int c)
+	{
+		System.out.print("Method m2"+c);
+	}
+	public static void main(String args[])
+	{
+		Scanner sc = new Scanner(System.in);
+		A obj = new A();
+		obj.m1(sc.nextInt());
+		obj.m2(sc.nextInt());
+	}
+}
+2.	Create a java application where we have one interface which contains two abstract methods and one defined method, inherit this interface into one concrete class to provide functionality for abstract methods and invoke these methods under main by providing dynamic inputs.
+import java.util.Scanner;
+interface I
+{
+	void m1(String h);
+	void m2(String y);
+	static void m3(int a)
+	{
+		System.out.println("defined method of interfsce using static");
+	}
+}
+class A implements I
+{
+	public void m1(String h)
+	{
+		System.out.println("hi"+h);
+	}
+	public void m2(String y)
+	{
+		System.out.println("hello"+y);
+	}
+	public static void main(String args[])
+	{
+		Scanner sc = new Scanner(System.in);
+		A obj = new A();
+		obj.m1(sc.next());
+		obj.m2(sc.next());
+		I.m3(sc.nextInt());
+	}
+}
+3.	Create a java application where we have three interfaces with one abstract method each, inherit all these interfaces at a time into a concrete class to provide functionality for abstract methods and invoke all the methods under main by providing dynamic inputs.
+import java.util.Scanner;
+interface I1
+{
+	int m1(int a);
+}
+interface I2
+{
+	String m2(int b);
+}
+interface I3
+{
+	char m3(int c);
+}
+class A implements I1,I2,I3
+{
+	static Scanner sc = new Scanner(System.in);
+	public int m1(int a)
+	{
+		return a;
+	}
+	public String m2(int b)
+	{
+		System.out.println(b);
+		return sc.next();
+	}
+	public char m3(int c)
+	{
+		System.out.println(c);
+		return sc.next().charAt(0);
+	}
+	public static void main(String args[])
+	{
+		A obj = new A();
+		System.out.println(obj.m1(sc.nextInt()));
+		System.out.println(obj.m2(sc.nextInt()));
+		System.out.println(obj.m3(sc.nextInt()));
+	}
+}
+4.	Create a java application where we have two interfaces with respect to individual abstract methods, inherit these interfaces into one more interface which contains one abstract method and one defined method, then inherit this interface into an abstract class where we have one parameterized constructor, one defined method and one abstract method, then inherit this class into a concrete class where we need to provide functionality for all the abstract methods and invoke all the properties under main by providing dynamic inputs.,
+import java.util.Scanner;
+interface I1
+{
+	String m1();
+}
+interface I2
+{
+	int m2(int a,int b);
+}
+interface I3 extends I1,I2
+{
+	Scanner sc = new Scanner(System.in);
+	int m3(int a);
+	default float m4(float m, float f)
+	{
+		return sc.nextFloat();
+	}
+}
+abstract class A implements I3
+{
+	A(int a)
+	{
+		System.out.print(a);
+	}
+	abstract void m5();
+	void m6()
+	{
+		System.out.println("defined method of abstract class");
+	}
+}
+class B extends A
+{
+	B()
+	{
+		super(I3.sc.nextInt());
+	}
+	void m5()
+	{
+		System.out.print("Abstract method of abstract class");
+	}
+	public int m3(int a)
+	{
+		System.out.print("Abstract method of interface I3");
+		return I3.sc.nextInt();
+	}
+	public int m2(int a,int b)
+	{
+		System.out.print("Abstract method of interface I2");
+		return a+b;
+	}
+	public String m1()
+	{
+		System.out.print("abstract method of interface I1");
+		return I3.sc.next();
+	}
+	public static void main(String args[])
+	{
+		B obj = new B();
+		obj.m6();
+		obj.m5();
+		System.out.println(obj.m4(I3.sc.nextFloat(),I3.sc.nextFloat()));
+		System.out.println(obj.m3(I3.sc.nextInt()));
+		System.out.println(obj.m2(I3.sc.nextInt(),I3.sc.nextInt()));
+		System.out.println(obj.m1());
+	}
+}
+5.	Create a java application where we have two interfaces with respect to individual abstract methods, one abstract class which contains one parameterized constructor, one defined method, and one abstract method, we also have one concrete class which contains one defined method, then inherit all the templates into one concrete class to provide functionality for abstract methods and invoke all the methods under main by providing dynamic inputs.
+import java.util.Scanner;
+interface I1
+{
+	int m1(int a);
+}
+interface I2
+{
+	float m2(float f);
+}
+abstract class A
+{
+	A(int b)
+	{
+		System.out.print(b);
+	}
+	void m3()
+	{
+		System.out.print("defined method of abstract class");
+	}
+	abstract int m4(int b);
+}
+class B extends A implements I1,I2
+{
+	static Scanner sc = new Scanner(System.in);
+	B()
+	{
+		super(sc.nextInt());
+	}
+	void m5()
+	{
+		System.out.println("defined method of concrete class");
+	}
+	int m4(int b)
+	{
+		System.out.print(b);
+		return sc.nextInt();
+	}
+	public float m2(float f)
+	{
+		System.out.print(f);
+		return sc.nextFloat();
+	}
+	public int m1(int a)
+	{
+		System.out.println(a);
+		return sc.nextInt();
+	}
+	public static void main(String args[])
+	{
+		B obj = new B();
+		obj.m5();
+		System.out.println(obj.m4(sc.nextInt()));
+		obj.m3();
+		System.out.print(obj.m2(sc.nextFloat()));
+		System.out.print(obj.m1(sc.nextInt()));
+	}
+}
+		
+--------------------------------22-05-2026-------------------------------------------
+upcasting interface-- dynamic binding ---- loose coupling
+--------------------------------------------------------------
+interface object as parameter
+---------------------------------------------------------------
+interface Pay
+{
+	void pay();
+}
+class Upi implements Pay
+{
+	public void pay()
+	{
+		System.out.println("Payment done through upi");
+	}
+}
+class Nb implements Pay
+{
+	public void pay()
+	{
+		System.out.println("Payment done through Net banking");
+	}
+}
+class Debitcard implements Pay
+{
+	public void pay()
+	{
+		System.out.println("Payment done through DebitCard");
+	}
+}
+class Main()
+{
+	static void makePayment(Pay p)
+	{
+		p.pay();
+	}
+	public static void main(String args[])
+	{
+		Debitcard db= new Debitcard();
+		Upi upi = new Upi();
+		Nb nb = new Nb();
+		System.out.print("Enter mode of payment 1.upi 2.netbanking 3.debitcard");
+		int n = sc.nextInt();
+		switch(n)
+		{
+			case 1: makePayment(upi);break;
+			case 2: makePayment(nb); break;
+			case 3:makePayment(db);break;
+		}
+	}
+}
+------------------------------------------------------
+interface object as parameter and return type
+--------------------------------------------------------
+
+import java.util.Scanner;
+interface Pay
+{
+	void pay();
+}
+class Upi implements Pay
+{
+	public void pay()
+	{
+		System.out.println("Payment done through upi");
+	}
+}
+class Nb implements Pay
+{
+	public void pay()
+	{
+		System.out.println("Payment done through Net banking");
+	}
+}
+class Debitcard implements Pay
+{
+	public void pay()
+	{
+		System.out.println("Payment done through DebitCard");
+	}
+}
+class Main
+{
+	static Pay makePayment(Pay p)
+	{
+		p.pay();
+		return p;
+	}
+	public static void main(String args[])
+	{
+		Scanner sc = new Scanner(System.in);
+		Debitcard db= new Debitcard();
+		Upi upi = new Upi();
+		Nb nb = new Nb();
+		System.out.print("Enter mode of payment 1.upi 2.netbanking 3.debitcard");
+		int n = sc.nextInt();
+		switch(n)
+		{
+			case 1: makePayment(upi);break;
+			case 2: makePayment(nb); break;
+			case 3:makePayment(db);break;
+		}
+	}
+}
+-----------------------------------------------------
+Downcasting---- 
+- It is Explicit type casting.
+- As we cannot access special properties of child class with an upcasted object , we downcast the same object to access those properties
+- we can downcast only an upcasted object
+- Through this downcasted object we access all properties of child class
+------------------------------------------------------
+interface I1{
+	void m1();
+}
+class A implements I1
+{
+	public void m1()
+	{
+		System.out.print("m1 of A");
+	}
+	void m2()
+	{
+		System.out.print("m2 of A");
+	}
+	public static void main(String args[])
+	{
+		I1 i = new A();
+		i.m1();
+		
+		//downcasting
+		A obj = (A)i;
+		obj.m2();
+	}
+}
+------------------------------------------------------
+interface object as parameter and child class object as return type
+--------------------------------------------------------
+
+import java.util.Scanner;
+interface Pay
+{
+	void pay();
+}
+class Upi implements Pay
+{
+	public void pay()
+	{
+		System.out.println("Payment done through upi");
+	}
+}
+class Nb implements Pay
+{
+	public void pay()
+	{
+		System.out.println("Payment done through Net banking");
+	}
+}
+class Debitcard implements Pay
+{
+	public void pay()
+	{
+		System.out.println("Payment done through DebitCard");
+	}
+}
+class Main
+{
+	static Upi makePayment(Pay p)
+	{
+		p.pay();
+		return (Upi)p;
+	}
+	public static void main(String args[])
+	{
+		Scanner sc = new Scanner(System.in);
+		Debitcard db= new Debitcard();
+		Upi upi = new Upi();
+		Nb nb = new Nb();
+		 makePayment(upi);break;
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+		
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
